@@ -2,11 +2,168 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Minha Surpresa</title>
+  <title>Para o meu amor 💖</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(to right, #ff758c, #ff7eb3);
+      overflow: hidden;
+      font-family: 'Segoe Script', cursive;
+      text-align: center;
+      color: #fff;
+    }
+
+    h1 {
+      margin-top: 100px;
+      font-size: 3em;
+      opacity: 0;
+      animation: fadeIn 3s forwards;
+    }
+
+    p {
+      font-size: 1.5em;
+      margin: 20px;
+      opacity: 0;
+      animation: fadeIn 3s forwards;
+      animation-delay: 2s;
+    }
+
+    #mensagem {
+      font-size: 1.8em;
+      font-weight: bold;
+      margin-top: 50px;
+      white-space: pre-line;
+      display: none;
+      line-height: 1.6em;
+    }
+
+    button {
+      margin-top: 30px;
+      padding: 15px 25px;
+      font-size: 18px;
+      background-color: #ff4d6d;
+      border: none;
+      border-radius: 15px;
+      color: white;
+      cursor: pointer;
+      transition: 0.3s;
+      opacity: 0;
+      animation: fadeIn 3s forwards;
+      animation-delay: 4s;
+    }
+
+    button:hover {
+      background-color: #e63950;
+    }
+
+    .heart {
+      position: absolute;
+      color: #fff;
+      font-size: 20px;
+      animation: fall 6s linear infinite;
+      text-shadow: 0 0 10px rgba(0,0,0,0.3);
+    }
+
+    @keyframes fadeIn {
+      to { opacity: 1; }
+    }
+
+    @keyframes fall {
+      0% { transform: translateY(-10%); opacity: 1; }
+      100% { transform: translateY(110vh); opacity: 0; }
+    }
+
+    .digitando::after {
+      content: "|";
+      animation: blink 0.7s infinite;
+    }
+
+    @keyframes blink {
+      50% { opacity: 0; }
+    }
+  </style>
 </head>
 <body>
-  <h1>Bem-vinda à minha surpresa 💖</h1>
-  <p>Este é meu primeiro site no GitHub Pages!</p>
+  <h1>Oi, meu amor 💕</h1>
+  <p>Tenho uma surpresa especial só pra você...</p>
+  <button onclick="mostrarMensagem()">Clique aqui 💌</button>
+  <p id="mensagem" class="digitando"></p>
+
+  <audio id="musica" src="sua-musica.mp3"></audio>
+
+  <script>
+    // Mensagem personalizada
+    const mensagemTexto = 
+`Eu amo compartilhar a vida com você 💖
+Obrigada por ser a melhor namorada do mundo ✨
+É um privilégio ter você ao meu lado 🌹
+
+Pra sempre sua,
+B.`;
+
+    // Função de digitação
+    function typeWriter(texto, elemento, delay = 60) {
+      let i = 0;
+      function escrever() {
+        if (i < texto.length) {
+          elemento.innerHTML = texto.substring(0, i+1);
+          i++;
+          setTimeout(escrever, delay);
+        } else {
+          elemento.classList.remove("digitando");
+          mostrarFinal();
+        }
+      }
+      escrever();
+    }
+
+    // Mostrar mensagem e tocar música
+    function mostrarMensagem() {
+      const mensagem = document.getElementById("mensagem");
+      mensagem.style.display = "block";
+      document.getElementById("musica").play();
+      typeWriter(mensagemTexto, mensagem, 60);
+    }
+
+    // Corações caindo
+    function criarCoracao() {
+      const heart = document.createElement("div");
+      heart.classList.add("heart");
+      heart.innerHTML = "❤️";
+      heart.style.left = Math.random() * 100 + "vw";
+      heart.style.fontSize = Math.random() * 25 + 15 + "px";
+      heart.style.animationDuration = (Math.random() * 3 + 3) + "s";
+      document.body.appendChild(heart);
+      setTimeout(() => heart.remove(), 6000);
+    }
+    setInterval(criarCoracao, 300);
+
+    // Mostrar TE AMO pulsando no final
+    function mostrarFinal() {
+      const final = document.createElement("div");
+      final.innerText = "💖 TE AMO 💖";
+      final.style.position = "absolute";
+      final.style.top = "50%";
+      final.style.left = "50%";
+      final.style.transform = "translate(-50%, -50%)";
+      final.style.fontSize = "4em";
+      final.style.color = "#ff4d6d";
+      final.style.fontWeight = "bold";
+      final.style.animation = "pulsar 1s infinite";
+      document.body.appendChild(final);
+    }
+
+    // Animação pulsante do TE AMO
+    const style = document.createElement('style');
+    style.innerHTML = `
+    @keyframes pulsar {
+      0% { transform: translate(-50%, -50%) scale(1); }
+      50% { transform: translate(-50%, -50%) scale(1.2); }
+      100% { transform: translate(-50%, -50%) scale(1); }
+    }`;
+    document.head.appendChild(style);
+
+  </script>
 </body>
 </html>
